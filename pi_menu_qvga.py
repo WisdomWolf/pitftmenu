@@ -52,7 +52,7 @@ def on_touch():
     # button 3 event
     for button in button_list:
         if button.matches(pygame.mouse.get_pos()):
-            button.action(*button.args)
+            do_run(button)
             break
 
 # Get Your External IP Address
@@ -86,7 +86,7 @@ def run_cmd(cmd):
     output = process.communicate()[0]
     return output
 
-def call_action(button):
+def do_run(button):
         screen.fill(Color.black)
         font = pygame.font.Font(None, 48)
         label = font.render(button.action_text, 1, (Color.white))
