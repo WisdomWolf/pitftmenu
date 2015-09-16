@@ -152,12 +152,11 @@ screen = pygame.display.set_mode(size)
 
 def build_screen():
     # Background Color
-    screen.fill(Color.black)
+    screen.fill(black)
     
     # Outer Border
-    pygame.draw.rect(screen, Color.blue, (0,0,320,240),5)
-    pi_hostname = run_cmd("hostname")
-    pi_hostname = pi_hostname[:-1]
+    pygame.draw.rect(screen, Color.blue, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 5)
+    pi_hostname = (run_cmd("hostname"))[:1]
     time_string = time.strftime('%H:%M:%S')
     date_string = time.strftime('%b %d %y')
     # Buttons and labels
