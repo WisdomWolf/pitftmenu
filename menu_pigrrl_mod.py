@@ -160,7 +160,7 @@ def build_screen():
     # First Row Label
     make_label(pi_hostname + " - " +  get_ip(), 20, 20, 24, blue)
     make_label(date_string, 20, 40, 24, blue)
-    make_label(time_string, 30, 60, 65, blue)
+    make_label(time_string, 30, 60, 72, blue)
     # Third Row buttons 5 and 6
     make_button("      Terminal", 15, 125, 50, 145, blue)
     make_button("  WiFi Setup", 170, 125, 50, 145, blue)
