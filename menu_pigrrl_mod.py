@@ -146,10 +146,10 @@ size = width, height = 320, 240
 
 screen = pygame.display.set_mode(size)
 
-# Background Color
-screen.fill(black)
-
 def build_screen():
+    # Background Color
+    screen.fill(black)
+    
     # Outer Border
     pygame.draw.rect(screen, blue, (0,0,320,240),5)
     pi_hostname = run_cmd("hostname")
