@@ -7,17 +7,13 @@ import subprocess
 import os
 import RPi.GPIO
 from subprocess import *
-try:
-    from enum import Enum
-except:
-    from enum34 import Enum
 from Menu_Button import Menu_Button
 os.environ["SDL_FBDEV"] = "/dev/fb1"
 os.environ["SDL_MOUSEDEV"] = "/dev/input/touchscreen"
 os.environ["SDL_MOUSEDRV"] = "TSLIB"
 
 #
-class Color(Enum):
+class Color():
     # colors    R    G    B
     white   = (255, 255, 255)
     red     = (255,   0,   0)
