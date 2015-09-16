@@ -152,7 +152,7 @@ screen = pygame.display.set_mode(size)
 
 def build_screen():
     # Background Color
-    screen.fill(black)
+    screen.fill(Color.black)
     
     # Outer Border
     pygame.draw.rect(screen, Color.blue, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 5)
