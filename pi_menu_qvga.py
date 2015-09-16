@@ -38,6 +38,7 @@ def make_button(text, xpo, ypo, height, width, color, action, action_text, args=
     label=font.render(str(text), 1, (color))
     screen.blit(label,(xpo, ypo + Y_PADDING))
     pygame.draw.rect(screen, color, (xpo - b.padding, ypo - b.padding, width, height), Menu_Button.RECT_FRAME_WIDTH)
+    print('added {0} button with padding:{1}'.format(text, b.padding))
     button_list.append(b)
 
 # define function for printing text in a specific place with a specific colour
