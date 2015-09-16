@@ -147,7 +147,7 @@ def button(number):
 # Set up the base menu you can customize your menu with the colors above
 
 #set size of the screen
-size = width, height = 320, 240
+size = SCREEN_WIDTH, SCREEN = 320, 240
 screen = pygame.display.set_mode(size)
 
 def build_screen():
