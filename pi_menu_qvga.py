@@ -158,22 +158,29 @@ screen.fill(Color.black)
 pygame.draw.rect(screen, Color.blue, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 5)
 pi_hostname = (run_cmd("hostname"))[:-1]
 
-def build_screen():
-   
+# Buttons and labels
+
+# First Row Label
+time_rect = pygame.Rect(20, 40, 290, 80)
+make_label(pi_hostname + " - " +  get_ip(), 20, 20, 24, Color.blue)
+
+# Third Row buttons 5 and 6
+make_button("      Terminal", 15, 125, 50, 145, Color.blue, sys.exit, "Exiting to Terminal")
+make_button("  WiFi Setup", 170, 125, 50, 145, Color.blue, os.system, "WiFi Settings. .", "sudo python /home/pi/pifi.py/pifi.py --gui")
+
+# Fourth Row Buttons
+make_button("      Reboot", 15, 165, 50, 145, Color.blue, restart, "Rebooting. .")
+make_button("   Shutdown", 170, 165, 50, 145, Color.blue, shutdown, "Shutting Down. .")
+
+def refresh_screen():
+    
     time_string = time.strftime('%H:%M:%S')
     date_string = time.strftime('%b %d %y')
-    # Buttons and labels
-    # First Row Label
-    time_rect = pygame.draw.rect(screen, Color.red, (20, 40, 290, 80), Menu_Button.RECT_FRAME_WIDTH)
-    make_label(pi_hostname + " - " +  get_ip(), 20, 20, 24, Color.blue)
+    
+    screen.fill(Color.black, time_rect)
     make_label(date_string, 20, 40, 36, Color.blue)
     make_label(time_string, 30, 50, 100, Color.blue)
-    # Third Row buttons 5 and 6
-    make_button("      Terminal", 15, 125, 50, 145, Color.blue, sys.exit, "Exiting to Terminal")
-    make_button("  WiFi Setup", 170, 125, 50, 145, Color.blue, os.system, "WiFi Settings. .", "sudo python /home/pi/pifi.py/pifi.py --gui")
-    # Fourth Row Buttons
-    make_button("      Reboot", 15, 165, 50, 145, Color.blue, restart, "Rebooting. .")
-    make_button("   Shutdown", 170, 165, 50, 145, Color.blue, shutdown, "Shutting Down. .")
+    
     
 
 #While loop to manage touch screen inputs
@@ -188,5 +195,5 @@ while 1:
             if event.key == K_ESCAPE:
                 sys.exit()
 
-    build_screen()            
+    refresh_screen()            
     pygame.display.flip()
