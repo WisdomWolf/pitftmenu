@@ -88,6 +88,7 @@ def run_cmd(cmd):
     return output
 
 def do_run(button):
+        print(button.action_text)
         screen.fill(Color.black)
         font = pygame.font.Font(None, 48)
         label = font.render(button.action_text, 1, (Color.white))
