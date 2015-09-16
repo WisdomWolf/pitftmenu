@@ -151,17 +151,20 @@ def button(number):
 size = SCREEN_WIDTH, SCREEN_HEIGHT = 320, 240
 screen = pygame.display.set_mode(size)
 
+# Background Color
+screen.fill(Color.black)
+
+# Outer Border
+pygame.draw.rect(screen, Color.blue, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 5)
+pi_hostname = (run_cmd("hostname"))[:-1]
+
 def build_screen():
-    # Background Color
-    screen.fill(Color.black)
-    
-    # Outer Border
-    pygame.draw.rect(screen, Color.blue, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 5)
-    pi_hostname = (run_cmd("hostname"))[:-1]
+   
     time_string = time.strftime('%H:%M:%S')
     date_string = time.strftime('%b %d %y')
     # Buttons and labels
     # First Row Label
+    time_rect = pygame.draw.rect(screen, Color.red, 20, 40, 290, 80)
     make_label(pi_hostname + " - " +  get_ip(), 20, 20, 24, Color.blue)
     make_label(date_string, 20, 40, 36, Color.blue)
     make_label(time_string, 30, 50, 100, Color.blue)
