@@ -1,7 +1,7 @@
 class Menu_Button:
 
     BORDER_PADDING = 5
-    Y_PADDING = 8
+    RECT_FRAME_WIDTH = 5
     
     def __init__(self, text, xpo, ypo, height, width, color, action, action_text, padding=BORDER_PADDING, argv=None):
         self.text = text

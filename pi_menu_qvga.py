@@ -27,15 +27,16 @@ class Color():
 
 # Initialize pygame and hide mouse
 pygame.init()
-pygame.mouse.set_visible(0)
+pygame.mouse.set_visible(False)
 button_list = []
+Y_PADDING = 8
 
 # define function for printing text in a specific place with a specific width and height with a specific colour and border
 def make_button(text, xpo, ypo, height, width, color, action, action_text, args=None):
     b = Menu_Button(text, xpo, ypo, height, width, color, action, action_text, argv=args)
     font=pygame.font.Font(None,30)
     label=font.render(str(text), 1, (color))
-    screen.blit(label,(xpo, ypo))
+    screen.blit(label,(xpo, ypo + Y_PADDING))
     pygame.draw.rect(screen, color, (xpo - b.padding, ypo - b.padding, width, height), Menu_Button.RECT_FRAME_WIDTH)
     button_list.append(b)
 
