@@ -185,7 +185,7 @@ while 1:
             if event.key == K_ESCAPE:
                 sys.exit()
     build_screen()            
-    pygame.display.update()
+    pygame.display.flip()
 
     if RPi.GPIO.input(21) == RPi.GPIO.LOW:
         screen.fill(black)
