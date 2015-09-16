@@ -164,7 +164,7 @@ def build_screen():
     date_string = time.strftime('%b %d %y')
     # Buttons and labels
     # First Row Label
-    time_rect = pygame.draw.rect(screen, Color.red, 20, 40, 290, 80)
+    time_rect = pygame.draw.rect(screen, Color.red, (20, 40, 290, 80), Menu_Button.RECT_FRAME_WIDTH)
     make_label(pi_hostname + " - " +  get_ip(), 20, 20, 24, Color.blue)
     make_label(date_string, 20, 40, 36, Color.blue)
     make_label(time_string, 30, 50, 100, Color.blue)
