@@ -35,12 +35,6 @@ def on_touch():
     # get the position that was touched
     touch_pos = (pygame.mouse.get_pos() [0], pygame.mouse.get_pos() [1])
     #  x_min                 x_max   y_min                y_max
-    # button 1 event
-    if 10 <= touch_pos[0] <= 155 and 65 <= touch_pos[1] <=105:
-            button(1)
-    # button 2 event
-    if 165 <= touch_pos[0] <= 310 and 65 <= touch_pos[1] <=105:
-            button(2)
     # button 3 event
     if 10 <= touch_pos[0] <= 155 and 125 <= touch_pos[1] <=165:
             button(3)
@@ -89,19 +83,7 @@ def run_cmd(cmd):
 def button(number):
     print "You pressed button ",number
 
-    if number == 1:
-        # desktop
-        screen.fill(black)
-        font=pygame.font.Font(None,48)
-        label=font.render("Launching Desktop", 1, (white))
-        screen.blit(label,(10,110))
-        pygame.display.flip()
-        pygame.quit()
-        subprocess.call("FRAMEBUFFER=/dev/fb1 startx", shell=True)
-        #run_cmd("FRAMEBUFFER=/dev/fb1 startx")
-        sys.exit()
-
-    if number == 2:
+    if number == 3:
         # exit
         screen.fill(black)
         font=pygame.font.Font(None,48)
@@ -109,17 +91,6 @@ def button(number):
         screen.blit(label,(10,110))
         pygame.display.flip()
         pygame.quit()
-        sys.exit()
-
-    if number == 3:
-        # Emulation Station
-        screen.fill(black)
-        font=pygame.font.Font(None,48)
-        label=font.render("Emulation Station Loading. .", 1, (white))
-        screen.blit(label,(20,110))
-        pygame.display.flip()
-        pygame.quit()
-        os.system("emulationstation")
         sys.exit()
 
     if number == 4:
@@ -182,14 +153,15 @@ screen.fill(black)
 pygame.draw.rect(screen, blue, (0,0,320,240),5)
 pi_hostname = run_cmd("hostname")
 pi_hostname = pi_hostname[:-1]
+time_string = time.strftime('%H:%M:%S')
+date_string = time.strftime('%b %d %y')
 # Buttons and labels
 # First Row Label
 make_label(pi_hostname + " - " +  get_ip(), 20, 20, 24, blue)
-# Second Row buttons 3 and 4
-make_button("     Desktop", 15, 65, 50, 145, blue)
-make_button("    Terminal", 170, 65, 50, 145, blue)
+make_label(date_string, 20, 40, 24, blue)
+make_label(time_string, 30, 60, 48, blue)
 # Third Row buttons 5 and 6
-make_button("      Games", 15, 125, 50, 145, blue)
+make_button("      Terminal", 15, 125, 50, 145, blue)
 make_button("  WiFi Setup", 170, 125, 50, 145, blue)
 # Fourth Row Buttons
 make_button("      Reboot", 15, 185, 50, 145, blue)
