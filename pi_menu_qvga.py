@@ -52,7 +52,7 @@ def on_touch():
     #  x_min                 x_max   y_min                y_max
     # button 3 event
     for button in button_list:
-        if button.matches(pygame.mouse.get_pos()):
+        if button.matches_touch(pygame.mouse.get_pos()):
             do_run(button)
             break
 
