@@ -161,7 +161,7 @@ pi_hostname = (run_cmd("hostname"))[:-1]
 # Buttons and labels
 
 # First Row Label
-time_rect = pygame.Rect(20, 40, 290, 80)
+time_rect = pygame.Rect(20, 40, 290, 77)
 make_label(pi_hostname + " - " +  get_ip(), 20, 20, 24, Color.blue)
 
 # Third Row buttons 5 and 6
@@ -169,8 +169,8 @@ make_button("      Terminal", 15, 125, 50, 145, Color.blue, sys.exit, "Exiting t
 make_button("  WiFi Setup", 170, 125, 50, 145, Color.blue, os.system, "WiFi Settings. .", "sudo python /home/pi/pifi.py/pifi.py --gui")
 
 # Fourth Row Buttons
-make_button("      Reboot", 15, 165, 50, 145, Color.blue, restart, "Rebooting. .")
-make_button("   Shutdown", 170, 165, 50, 145, Color.blue, shutdown, "Shutting Down. .")
+make_button("      Reboot", 15, 185, 50, 145, Color.blue, restart, "Rebooting. .")
+make_button("   Shutdown", 170, 185, 50, 145, Color.blue, shutdown, "Shutting Down. .")
 
 def refresh_screen():
     
