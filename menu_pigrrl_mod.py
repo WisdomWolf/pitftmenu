@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys, pygame, socket
 from pygame.locals import *
 import time
@@ -144,22 +146,27 @@ size = width, height = 320, 240
 
 screen = pygame.display.set_mode(size)
 
-# Background Color
-screen.fill(black)
-
-# Outer Border
-pygame.draw.rect(screen, blue, (0,0,320,240),5)
-pi_hostname = run_cmd("hostname")
-pi_hostname = pi_hostname[:-1]
-# Buttons and labels
-# First Row Label
-make_label(pi_hostname + " - " +  get_ip(), 20, 20, 36, blue)
-# Third Row buttons 5 and 6
-make_button("      Terminal", 15, 125, 50, 145, blue)
-make_button("  WiFi Setup", 170, 125, 50, 145, blue)
-# Fourth Row Buttons
-make_button("      Reboot", 15, 185, 50, 145, blue)
-make_button("   Shutdown", 170, 185, 50, 145, blue)
+def build_screen():
+    # Background Color
+    screen.fill(black)
+    
+    # Outer Border
+    pygame.draw.rect(screen, blue, (0,0,320,240),5)
+    pi_hostname = run_cmd("hostname")
+    pi_hostname = pi_hostname[:-1]
+    time_string = time.strftime('%H:%M:%S')
+    date_string = time.strftime('%b %d %y')
+    # Buttons and labels
+    # First Row Label
+    make_label(pi_hostname + " - " +  get_ip(), 20, 20, 24, blue)
+    make_label(date_string, 20, 40, 24, blue)
+    make_label(time_string, 30, 50, 100, blue)
+    # Third Row buttons 5 and 6
+    make_button("      Terminal", 15, 125, 50, 145, blue)
+    make_button("  WiFi Setup", 170, 125, 50, 145, blue)
+    # Fourth Row Buttons
+    make_button("      Reboot", 15, 185, 50, 145, blue)
+    make_button("   Shutdown", 170, 185, 50, 145, blue)
 
 # LBO Pin from Powerboost
 RPi.GPIO.setmode (RPi.GPIO.BCM)
@@ -177,7 +184,9 @@ while 1:
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 sys.exit()
-    pygame.display.update()
+
+    build_screen()            
+    pygame.display.flip()
 
     if RPi.GPIO.input(21) == RPi.GPIO.LOW:
         screen.fill(black)

@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys, pygame, socket
 from pygame.locals import *
 import time
@@ -182,7 +184,7 @@ pi_hostname = run_cmd("hostname")
 pi_hostname = pi_hostname[:-1]
 # Buttons and labels
 # First Row Label
-make_label(pi_hostname + " - " +  get_ip(), 20, 20, 36, blue)
+make_label(pi_hostname + " - " +  get_ip(), 20, 20, 24, blue)
 # Second Row buttons 3 and 4
 make_button("     Desktop", 15, 65, 50, 145, blue)
 make_button("    Terminal", 170, 65, 50, 145, blue)
