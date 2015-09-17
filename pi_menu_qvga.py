@@ -97,55 +97,12 @@ def do_run(button):
         pygame.display.flip()
         pygame.quit()
         button.call_action()
-        
-# Define each button press action
-def button(number):
-    print "You pressed button ",number
-
-    if number == 3:
-        # exit
-        screen.fill(Color.black)
-        font=pygame.font.Font(None,48)
-        label=font.render("Exiting to Terminal", 1, (Color.white))
-        screen.blit(label,(10,110))
-        pygame.display.flip()
-        pygame.quit()
-        sys.exit()
-
-    if number == 4:
-        # Wifi Settings
-        screen.fill(black)
-        font=pygame.font.Font(None,48)
-        label=font.render("WiFi Settings. .", 1, (white))
-        screen.blit(label,(20,120))
-        pygame.display.flip()
-        pygame.quit()
-        os.system("sudo python /home/pi/pifi.py/pifi.py --gui")
-        sys.exit()
-
-    if number == 5:
-        # reboot
-        screen.fill(black)
-        font=pygame.font.Font(None,48)
-        label=font.render("Rebooting. .", 1, (white))
-        screen.blit(label,(40,110))
-        pygame.display.flip()
-        pygame.quit()
-        restart()
-        sys.exit()
-
-    if number == 6:
-        # shutdown
-        screen.fill(black)
-        font=pygame.font.Font(None,48)
-        label=font.render("Shutting Down. .", 1, (white))
-        screen.blit(label,(20,110))
-        pygame.display.flip()
-        pygame.quit()
-        shutdown()
-        sys.exit()
 
 # Set up the base menu you can customize your menu with the colors above
+
+# Set brightness to ~40%
+run_cmd("gpio -g mod 18 pwm")
+rum_cmd("gpio -g pwm 18 400")
 
 #set size of the screen
 size = SCREEN_WIDTH, SCREEN_HEIGHT = 320, 240
@@ -155,7 +112,7 @@ screen = pygame.display.set_mode(size)
 screen.fill(Color.black)
 
 # Outer Border
-pygame.draw.rect(screen, Color.white, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 5)
+pygame.draw.rect(screen, Color.blue, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 5)
 pi_hostname = (run_cmd("hostname"))[:-1]
 
 # Buttons and labels
