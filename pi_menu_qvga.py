@@ -161,7 +161,7 @@ pi_hostname = (run_cmd("hostname"))[:-1]
 # Buttons and labels
 
 # First Row Label
-time_rect = pygame.Rect(20, 20, 290, 57)
+time_rect = pygame.Rect(20, 10, 290, 77)
 make_label(pi_hostname + " - " +  get_ip(), 20, SCREEN_HEIGHT - 20, 24, Color.blue)
 
 # Third Row buttons 5 and 6
@@ -178,8 +178,8 @@ def refresh_screen():
     time_string = time.strftime('%H:%M:%S')
     
     screen.fill(Color.black, time_rect)
-    make_label(date_string, 20, 20, 36, Color.blue)
-    make_label(time_string, 30, 30, 100, Color.blue)
+    make_label(date_string, 20, 10, 36, Color.blue)
+    make_label(time_string, 30, 20, 100, Color.blue)
     
     
 
