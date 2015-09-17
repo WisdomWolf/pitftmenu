@@ -155,31 +155,31 @@ screen = pygame.display.set_mode(size)
 screen.fill(Color.black)
 
 # Outer Border
-pygame.draw.rect(screen, Color.blue, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 5)
+pygame.draw.rect(screen, Color.white, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 5)
 pi_hostname = (run_cmd("hostname"))[:-1]
 
 # Buttons and labels
 
 # First Row Label
-time_rect = pygame.Rect(20, 40, 290, 77)
-make_label(pi_hostname + " - " +  get_ip(), 20, 20, 24, Color.blue)
+time_rect = pygame.Rect(20, 20, 290, 57)
+make_label(pi_hostname + " - " +  get_ip(), 20, SCREEN_HEIGHT - 20, 24, Color.blue)
 
 # Third Row buttons 5 and 6
-make_button("      Terminal", 15, 125, 50, 145, Color.blue, sys.exit, "Exiting to Terminal")
-make_button("  WiFi Setup", 170, 125, 50, 145, Color.blue, os.system, "WiFi Settings. .", "sudo python /home/pi/pifi.py/pifi.py --gui")
+make_button("      Terminal", 15, 105, 50, 145, Color.blue, sys.exit, "Exiting to Terminal")
+make_button("  WiFi Setup", 170, 105, 50, 145, Color.blue, os.system, "WiFi Settings. .", "sudo python /home/pi/pifi.py/pifi.py --gui")
 
 # Fourth Row Buttons
-make_button("      Reboot", 15, 185, 50, 145, Color.blue, restart, "Rebooting. .")
-make_button("   Shutdown", 170, 185, 50, 145, Color.blue, shutdown, "Shutting Down. .")
+make_button("      Reboot", 15, 165, 50, 145, Color.blue, restart, "Rebooting. .")
+make_button("   Shutdown", 170, 165, 50, 145, Color.blue, shutdown, "Shutting Down. .")
 
 def refresh_screen():
     
+    date_string = time.strftime('%a %b %d, %Y')
     time_string = time.strftime('%H:%M:%S')
-    date_string = time.strftime('%b %d %y')
     
     screen.fill(Color.black, time_rect)
-    make_label(date_string, 20, 40, 36, Color.blue)
-    make_label(time_string, 30, 50, 100, Color.blue)
+    make_label(date_string, 20, 20, 36, Color.blue)
+    make_label(time_string, 30, 30, 100, Color.blue)
     
     
 
