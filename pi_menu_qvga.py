@@ -175,7 +175,7 @@ make_button("   Shutdown", 170, 165, 50, 145, Color.blue, shutdown, "Shutting Do
 def refresh_screen():
     
     date_string = time.strftime('%a %b %d, %Y')
-    time_string = time.strftime('%H:%M:%S')
+    time_string = time.strftime('%I:%M %p')
     
     screen.fill(Color.black, time_rect)
     make_label(date_string, 20, 10, 36, Color.blue)
