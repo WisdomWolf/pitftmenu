@@ -161,7 +161,7 @@ pi_hostname = (run_cmd("hostname"))[:-1]
 # Buttons and labels
 
 # First Row Label
-time_rect = pygame.Rect(20, 10, 290, 77)
+time_rect = pygame.Rect(20, 10, 290, 79)
 make_label(pi_hostname + " - " +  get_ip(), 20, SCREEN_HEIGHT - 20, 24, Color.blue)
 
 # Third Row buttons 5 and 6
