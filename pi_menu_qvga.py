@@ -102,7 +102,7 @@ def do_run(button):
 
 # Set brightness to ~40%
 run_cmd("gpio -g mod 18 pwm")
-rum_cmd("gpio -g pwm 18 400")
+run_cmd("gpio -g pwm 18 400")
 
 #set size of the screen
 size = SCREEN_WIDTH, SCREEN_HEIGHT = 320, 240
