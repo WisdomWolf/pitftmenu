@@ -179,7 +179,7 @@ def refresh_screen():
     
     screen.fill(Color.black, time_rect)
     make_label(date_string, 20, 10, 36, Color.blue)
-    make_label(time_string, 20, 20, 100, Color.blue)
+    make_label(time_string, 20, 25, 100, Color.blue)
     
     
 
