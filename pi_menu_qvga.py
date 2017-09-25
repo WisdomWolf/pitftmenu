@@ -12,7 +12,7 @@ os.environ["SDL_FBDEV"] = "/dev/fb1"
 os.environ["SDL_MOUSEDEV"] = "/dev/input/touchscreen"
 os.environ["SDL_MOUSEDRV"] = "TSLIB"
 
-#
+# thinsgs
 class Color():
     # colors    R    G    B
     white   = (255, 255, 255)
