@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import sys, pygame, socket
+from signal import alarm, signal, SIGALRM, SIGKILL
 from pygame.locals import *
 import time
 import subprocess
@@ -25,11 +26,6 @@ class Color():
     yellow  = (255, 255,   0)
     orange  = (255, 127,   0)
 
-# Initialize pygame and hide mouse
-pygame.init()
-pygame.mouse.set_visible(False)
-button_list = []
-Y_PADDING = 8
 
 # define function for printing text in a specific place with a specific width and height with a specific colour and border
 def make_button(text, xpo, ypo, height, width, color, action, action_text, args=None):
@@ -101,25 +97,57 @@ def do_run(button):
 # Set up the base menu you can customize your menu with the colors above
 
 # Set brightness to ~40%
-run_cmd("gpio -g mod 18 pwm")
+run_cmd("gpio -g mode 18 pwm")
 run_cmd("gpio -g pwm 18 400")
+print('Set brightness to 400')
 
 #set size of the screen
 size = SCREEN_WIDTH, SCREEN_HEIGHT = 320, 240
-screen = pygame.display.set_mode(size)
+
+# Solution from StackOverflow user BBUK
+# https://stackoverflow.com/questions/17035699/pygame-requires-keyboard-interrupt-to-init-display
+def init_pygame():
+    class Alarm(Exception):
+        pass
+    def alarm_handler(signum, frame):
+        raise Alarm
+    signal(SIGALRM, alarm_handler)
+    alarm(3)
+    print('initializing pygame screen')
+    try:
+        pygame.init()
+        DISPLAYSURFACE = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        alarm(0)
+    except Alarm:
+        raise KeyboardInterrupt
+
+init_pygame()
+print('screen initialized')
+screen = pygame.display.get_surface()
+print('screen mode set')
+
+# Initialize pygame and hide mouse
+pygame.mouse.set_visible(False)
+button_list = []
+Y_PADDING = 8
+
+print('initialization complete')
 
 # Background Color
 screen.fill(Color.black)
+print('screen fill completed')
 
 # Outer Border
 pygame.draw.rect(screen, Color.blue, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 5)
 pi_hostname = (run_cmd("hostname"))[:-1]
+print('outer border and pi_hostname retrieval completed')
 
 # Buttons and labels
 
 # First Row Label
 time_rect = pygame.Rect(20, 10, 290, 79)
 make_label(pi_hostname + " - " +  get_ip(), 20, SCREEN_HEIGHT - 20, 24, Color.blue)
+print('first row label creation completed')
 
 # Third Row buttons 5 and 6
 make_button("      Terminal", 15, 105, 50, 145, Color.blue, sys.exit, "Exiting to Terminal")
@@ -128,6 +156,7 @@ make_button("  WiFi Setup", 170, 105, 50, 145, Color.blue, os.system, "WiFi Sett
 # Fourth Row Buttons
 make_button("      Reboot", 15, 165, 50, 145, Color.blue, restart, "Rebooting. .")
 make_button("   Shutdown", 170, 165, 50, 145, Color.blue, shutdown, "Shutting Down. .")
+print('button creation completed')
 
 def refresh_screen():
     
@@ -140,17 +169,22 @@ def refresh_screen():
     
     
 
+print('beginning primary loop')
 #While loop to manage touch screen inputs
 while 1:
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            pos = (pygame.mouse.get_pos() [0], pygame.mouse.get_pos() [1])
-            on_touch()
+    try:
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos = (pygame.mouse.get_pos() [0], pygame.mouse.get_pos() [1])
+                on_touch()
 
-        #ensure there is always a safe way to end the program if the touch screen fails
-        if event.type == KEYDOWN:
-            if event.key == K_ESCAPE:
-                sys.exit()
+            #ensure there is always a safe way to end the program if the touch screen fails
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    sys.exit()
 
-    refresh_screen()            
-    pygame.display.flip()
+        refresh_screen()            
+        pygame.display.flip()
+    except KeyboardInterrupt:
+        print('Ctrl+C received. Exiting')
+        sys.exit()
