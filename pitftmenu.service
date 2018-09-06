@@ -1,0 +1,11 @@
+[Unit]
+Description=Pi Clock
+After=network-online.target
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/python /home/pi/pitftmenu/pi_menu_qvga.py
+Restart=alwas
+
+[Install]
+WantedBy=multi-user.target
